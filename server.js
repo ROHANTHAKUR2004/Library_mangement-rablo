@@ -1,7 +1,7 @@
 import express, { json } from "express";
 import dotenv from "dotenv";
 import cors from "cors"; 
-import connectdb from "./config/db.js";
+import connectdb from "./src/config/db.js";
 
 dotenv.config({
     path: "./.env",
