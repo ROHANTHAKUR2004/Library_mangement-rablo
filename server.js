@@ -2,6 +2,8 @@ import express, { json } from "express";
 import dotenv from "dotenv";
 import cors from "cors"; 
 import connectdb from "./src/config/db.js";
+import bookRouter from "./src/routes/bookRoutes.js";
+import authorRouter from "./src/routes/authorRouter.js";
 
 dotenv.config({
     path: "./.env",
@@ -22,7 +24,8 @@ app.use(cors(corsOptions));
 
 
 
-
+app.use('/books',bookRouter);
+app.use('/authors', authorRouter)
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(err.status || 500).json({
