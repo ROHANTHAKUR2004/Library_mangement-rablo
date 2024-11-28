@@ -1,6 +1,6 @@
 import authorModel from "../models/author.model.js";
 
-// Get all authors
+
 export const getAllAuthors = async (req, res) => {
     try {
         const authors = await authorModel.find({});
@@ -15,7 +15,7 @@ export const getAllAuthors = async (req, res) => {
     }
 };
 
-// Get author by ID
+
 export const getAuthorById = async (req, res) => {
     try {
         const { authorId } = req.params;
@@ -36,7 +36,7 @@ export const getAuthorById = async (req, res) => {
     }
 };
 
-// Add a new author
+
 export const addAuthor = async (req, res) => {
     try {
         const newAuthor = new authorModel(req.body);
@@ -51,7 +51,7 @@ export const addAuthor = async (req, res) => {
     }
 };
 
-// Update an author
+
 export const updateAuthor = async (req, res) => {
     try {
         const { authorId } = req.params;
@@ -64,7 +64,6 @@ export const updateAuthor = async (req, res) => {
             });
         }
 
-        // Update fields
         author.name = name || author.name;
         author.bio = bio || author.bio;
         author.birthdate = birthdate || author.birthdate;
@@ -82,7 +81,6 @@ export const updateAuthor = async (req, res) => {
     }
 };
 
-// Delete an author by ID
 export const deleteAuthorById = async (req, res) => {
     try {
         const { authorId } = req.params;

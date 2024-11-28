@@ -1,5 +1,6 @@
 import bookModel from "../models/book.model.js";
 
+
 // Get all books
 export const getAllbooks = async (req, res) => {
     try {
@@ -19,7 +20,7 @@ export const getAllbooks = async (req, res) => {
 export const getBooksById = async (req, res) => {
     try {
         const { bookId } = req.params;
-        const book = await bookModel.findById(bookId); // Fixed method name
+        const book = await bookModel.findById(bookId); 
         if (!book) {
             return res.status(404).json({
                 message: "Book not found by this ID",
@@ -100,3 +101,30 @@ export const deleteBookById = async (req, res) => {
         });
     }
 };
+
+export const uploadBookCover = async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded.' });
+      }
+  
+      const book = await bookModel.findByIdAndUpdate(
+        id,
+        { coverImage: req.file.path },
+        { new: true }
+      );
+  
+      if (!book) {
+        return res.status(404).json({ message: 'Book not found.' });
+      }
+  
+      res.status(200).json({
+        message: 'Cover image uploaded successfully.',
+        book,
+      });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error.', error: error.message });
+    }
+  };

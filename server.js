@@ -4,7 +4,9 @@ import cors from "cors";
 import connectdb from "./src/config/db.js";
 import bookRouter from "./src/routes/bookRoutes.js";
 import authorRouter from "./src/routes/authorRouter.js";
-
+import userRouter from "./src/routes/userRouter.js"
+import loanRouter from "./src/routes/loanRouter.js";
+import reviewRouter from "./src/routes/reviewRouter.js";
 dotenv.config({
     path: "./.env",
 });
@@ -25,7 +27,10 @@ app.use(cors(corsOptions));
 
 
 app.use('/books',bookRouter);
-app.use('/authors', authorRouter)
+app.use('/authors', authorRouter);
+app.use('/users', userRouter);
+app.use('/loan', loanRouter);
+app.use('/review', reviewRouter);
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(err.status || 500).json({
